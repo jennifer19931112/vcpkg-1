@@ -38,9 +38,11 @@ vcpkg_copy_pdbs()
 # Handle copyright
 file(INSTALL ${SOURCE_PATH}/LICENSE DESTINATION ${CURRENT_PACKAGES_DIR}/share/gainput RENAME copyright)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/include)
-
 if(VCPKG_LIBRARY_LINKAGE STREQUAL static)
-    if(EXISTS ${CURRENT_PACKAGES_DIR}/lib/gainputstatic.lib)
+    file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin ${CURRENT_PACKAGES_DIR}/debug/bin)
+endif()
+if(VCPKG_LIBRARY_LINKAGE STREQUAL static)
+    if(EXISTS ${CURRENT_PACKAGES_DIR}/lib/gainputstatic-d.lib)
         file(RENAME ${CURRENT_PACKAGES_DIR}/lib/gainputstatic.lib ${CURRENT_PACKAGES_DIR}/lib/gainput.lib)
         file(RENAME ${CURRENT_PACKAGES_DIR}/debug/lib/gainputstaticd.lib ${CURRENT_PACKAGES_DIR}/debug/lib/gainputd.lib)
     endif()
